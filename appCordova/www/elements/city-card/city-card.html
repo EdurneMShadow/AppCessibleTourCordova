@@ -1,0 +1,45 @@
+<dom-module id="city-card">
+<style>
+  iron-image {
+    max-height: 250px;
+    max-width: 250px;
+  }
+
+  div {
+    text-align: center;
+  }
+</style>
+
+  <template>
+  <paper-card on-tap="setCity">
+      <iron-image src="../../images/{{city}}.jpg"></iron-image>
+      <div class="card-content">{{city}}</div>
+  </paper-card>
+  </template>
+</dom-module>  
+
+<script>
+  Polymer({
+      is: 'city-card',
+
+      properties:{
+        city: String,
+        dialog: Object,
+      },
+
+      ready: function (){
+        if (this.hasAttribute('id-dialog')) {
+          var id = this.getAttribute('id-dialog');
+          this.dialog = document.getElementById(id);  
+        }
+      },
+
+      setCity: function(){
+        if (this.dialog) {
+          this.dialog.close();
+        }
+        app.cityChanged(this.city);
+      }
+
+    });
+</script>

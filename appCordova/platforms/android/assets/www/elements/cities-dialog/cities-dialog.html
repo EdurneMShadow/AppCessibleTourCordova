@@ -1,0 +1,68 @@
+<dom-module id="cities-dialog">
+  <style>
+      paper-dialog{
+        width: 100%; 
+        border: 1px solid #000000;
+        border-radius: 7px;
+        text-align: justify;
+        top: 0px;
+        height: 100%;
+        background: #3F51B5;
+      }
+
+      city-card {
+        width: 20%;
+        height: 50%;
+        margin: 5px;
+      }
+
+      .container-flex {
+
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--layout-around-justified);
+        @apply(--layout-self-center);
+      }
+
+      #select-city {
+        margin: 60px 0;
+        font-size: 30px;
+        font-style: bold;
+        color: white;
+      }
+    </style>
+
+  <template>
+    <paper-dialog id="dialog" entry-animation="slide-down-animation" exit-animation="slide-up-animation" modal opened>
+
+    <div id="select-city" class="container-flex">Choose a city</div>
+
+    <div class="container-flex">
+      <template is="dom-repeat" items="{{listCities}}">
+        <city-card city="{{item}}" id-dialog="dialog"></city-card>
+      </template>
+    </div>
+    </paper-dialog>
+  </template>
+</dom-module>  
+
+<script>
+  Polymer({
+      is: 'cities-dialog',
+
+      properties:{
+        listCities: {
+          type: Array,
+          value: ["Santander", "Caceres", "Madrid"]
+        },
+      },
+
+      open: function (){
+        this.$.dialog.open();
+      },
+
+      close: function (){
+        this.$.dialog.close();
+      },
+    });
+</script>
